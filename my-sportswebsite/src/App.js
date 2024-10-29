@@ -1,18 +1,15 @@
-<<<<<<< HEAD
-import AppHero from './Components/hero';
-import AppAbout from './Components/about';
+import AppHero from './components/hero';
+import AppAbout from './components/about';
 
-=======
 import React from 'react';
 import NavBar from './components/NavBar'
->>>>>>> main
 import './App.css';
 
 function App() {
-  return (
-<<<<<<< HEAD
-    <div className="App font-sans bg-gray-100 min-h-screen flex flex-col">
-      
+  return (      
+    <div>
+      <NavBar/>
+
       <header id="header" className="w-full bg-white shadow-md">
         <AppHero className="m-0" />
       </header>
@@ -21,11 +18,6 @@ function App() {
           <AppAbout />
         </main>
 
-
-=======
-    <div>
-      <NavBar/>
->>>>>>> main
     </div>
   );
 }
