@@ -1,23 +1,21 @@
 import React from 'react'
-import AppHero from '../components/hero';
-import AppAbout from '../components/about';
-import AppTeams from '../components/teams';
-
+import AppHero from '../Components/hero';
+import AppAbout from '../Components/about';
+import AppTeams from '../Components/teams';
 
 const Home = () => {
   return (
-    <div className="App font-sans bg-gray-100 min-h-screen flex flex-col">
-      
-    <header id="header" className="Sw-full bg-white shadow-md">
-      <AppHero className="m-0" />
-    </header>
+    <div className=' pt-20'>
 
-    <main id="header" className="w-full bg-black shadow-md">
-        <AppAbout />
-        <AppTeams />
-      </main>
+<header id="header" className="w-full bg-white shadow-md">
+        <AppHero className="m-0" />
+      </header>
 
-    {/* <div className=' pt-20'>Home */}
+      <main id="header" className="w-full bg-gray shadow-md">
+          <AppAbout />
+          <AppTeams />
+
+        </main>
 
     </div>
   )
