@@ -16,7 +16,7 @@ const NavBar = () => {
 
   return (
     <Router>
-        <div className='flex fixed justify-between items-center h-15 w-full mx-auto px-4 text-white bg-black'>
+        <div className='flex fixed z-50 justify-between items-center h-15 w-full mx-auto px-4 text-white bg-black'>
             <div>
                 <FaFootballBall/>
             </div>
