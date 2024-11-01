@@ -21,15 +21,12 @@ export default function AppTeams() {
 
               <div className="flex flex-col items-center space-y-4">
                 <div className="flex items-center space-x-4">
-                  <div className="relative">
-                    <div className="w-48 h-48 bg-gray-300 rounded-full"></div>
-                    <img src={cardinals} alt="Background" className="w-40 h-40 object-cover rounded-full absolute top-4 left-4" />
-                  </div>
 
-                  <h2 className="text-2xl font-semibold">Arizona Cardinals</h2>
+                  <img src={cardinals} alt="Background" className="w-48 h-48 object-cover rounded-full" />
+                  <h2 className="text-2xl font-semibold">Atlanta Falcons</h2>
 
                 </div>
-                  
+    
                 <div className="my-8"></div> {/* This adds space between the two sections */}
                   
                 <div className="flex items-center space-x-4">
