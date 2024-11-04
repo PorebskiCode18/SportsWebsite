@@ -1,8 +1,8 @@
 import React from 'react'
-import AppHero from '../Components/hero';
-import AppAbout from '../Components/about';
-import AppTeams from '../Components/teams';
-import AppSearch from '../Components/searchTeams';
+import AppHero from '../components/hero';
+import AppAbout from '../components/about';
+import AppTeams from '../components/teams';
+import AppSearch from '../components/searchTeams';
 
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
         <AppHero className="m-0" />
       </header>
 
-      <main id="header" className="w-full bg-gray shadow-md">
+      <main id="header" className="w-full bg-gray-300 shadow-md">
           <AppAbout />
           <AppTeams />
           <AppSearch />
