@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import Matchups from '../pages/Matchups';
 import Injuries from '../pages/Injuries';
+import DepthCharts from '../pages/DepthChart'
 import { AiOutlineMenu , AiOutlineClose} from "react-icons/ai";
 import { FaFootballBall } from "react-icons/fa";
 
@@ -27,9 +28,6 @@ const NavBar = () => {
                 <li className='p-4'>
                     <Link to="/matchups">Matcups</Link>
                 </li>
-                <li className='p-4'>
-                    <Link to="/injuries">Injuries</Link> 
-                </li>
             </ul>
             <div onClick={handleNav}  className='block md:hidden'>
                 {!nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20}/>}
@@ -43,17 +41,16 @@ const NavBar = () => {
                     <li className='p-4 border-b border-gray-600'>
                         <Link to="/matchups">Matcups</Link>
                     </li>
-                    <li className='p-4 border-b border-gray-600'>
-                        <Link to="/injuries">Injuries</Link>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/matchups" element={<Matchups />} />
-            <Route path="/injuries" element={<Injuries />} />
+            <Route 
+                    path="/depth-charts/:homeTeamId/:awayTeamId/:currentWeek" 
+                    element={<DepthCharts />} 
+                />
         </Routes>
     </Router>
   )
