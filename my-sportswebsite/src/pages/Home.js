@@ -1,8 +1,8 @@
 import React from 'react'
-import AppHero from '../components/hero';
-import AppAbout from '../components/about';
-import AppTeams from '../components/teams';
-import AppSearch from '../components/searchTeams';
+import AppHero from '../Components/hero';
+import AppAbout from '../Components/about';
+import AppTeams from '../Components/teams';
+import AppSearch from '../Components/searchTeams';
 
 
 const Home = () => {
