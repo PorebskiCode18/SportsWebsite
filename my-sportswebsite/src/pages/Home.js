@@ -7,7 +7,7 @@ import AppSearch from '../Components/searchTeams';
 
 const Home = () => {
   return (
-    <div className=' pt-20'>
+    <div className=' pt-15'>
 
 <header id="header" className="w-full bg-white shadow-md">
         <AppHero className="m-0" />
