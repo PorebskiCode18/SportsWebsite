@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 const TeamDetails = () => {
     const { teamId } = useParams();
     const [teamData, setTeamData] = useState(null);
-
+    const [teamStandingsData, setTeamStandingsData] = useState(null)
+    
     useEffect(() => {
         const fetchTeamData = async () => {
             try {
@@ -12,12 +13,29 @@ const TeamDetails = () => {
                 const data = await response.json();
                 console.log(data);
                 setTeamData(data);
+                response = await fetch(`https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/standings/season.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`);
+                data = await response.json();
+                const team = findTeamById(data, teamId);
+                if (team) {
+                    setTeamStandingsData(team);
+                  } else {
+                    setError("Team not found");
+                  }
             } catch (error) {
                 console.error("Error fetching team data:", error);
             }
         };
 
         fetchTeamData();
+        const findTeamById = (data, id) => {
+            for (const conference of data.conferences) {
+              for (const division of conference.divisions) {
+                const team = division.teams.find((t) => t.id === id);
+                if (team) return team;
+              }
+            }
+            return null;
+          };
     }, [teamId]);
 
     if (!teamData) return <p>Loading...</p>;
@@ -63,6 +81,12 @@ const TeamDetails = () => {
                         <p>RGB: {`rgb(${color.rgb_color.red}, ${color.rgb_color.green}, ${color.rgb_color.blue})`}</p>
                     </div>
                 ))}
+                <h2 className='pt-4 font-bold text-xl underline'>Record</h2>
+                <p>{teamStandingsData.wins} - {teamStandingsData.losses} - {teamStandingsData.ties}</p>
+                <p>Win pct: {teamStandingsData.win_pct}</p>
+                <p>Streak: {teamStandingsData.streak.desc} </p>
+                <p>Points For: {teamStandingsData.points_for}</p>
+                <p>Points Against: {teamStandingsData.points_against}</p>
             </div>
             <div className='pt-7'></div>
         </div>

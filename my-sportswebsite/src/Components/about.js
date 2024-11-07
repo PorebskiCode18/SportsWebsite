@@ -41,9 +41,10 @@ export default function AppAbout() {
                         </p>
 
                         <h2 className="text-2xl font-semibold mb-4">How We Get The Data</h2>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 mb-6">
                             We rely on Sportradar's Football API to provide accurate, up-to-date data directly from the NFL. Through their comprehensive data streams, we’re able to deliver week-to-week depth charts, current injury reports, and seasonal statistics for every team and player.
                         </p>
+                        <p className='text-gray-700'>Click on the team logos to learn more about the team.</p>
                     </div>
 
                     {/* Carousel Section */}

@@ -48,7 +48,6 @@ export default function AppTeams() {
       <div className="container mx-auto text-black">
 
         <div className="my-16"></div> {/* Space between sections */}
-
         <div className="text-center mb-8">
           <h2 className="text-4xl font-bold">NFC Teams:</h2>
         </div>
