@@ -13,20 +13,30 @@ const TeamDetails = () => {
                 const data = await response.json();
                 console.log(data);
                 setTeamData(data);
-                response = await fetch(`https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/standings/season.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`);
-                data = await response.json();
-                const team = findTeamById(data, teamId);
-                if (team) {
-                    setTeamStandingsData(team);
-                  } else {
-                    setError("Team not found");
-                  }
+                const response2 = await fetch(`https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/standings/season.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`);
+                const data2 = await response2.json();
+                const team = findTeamById(data2, teamId);
+                console.log(team)
+                setTeamStandingsData(team); 
             } catch (error) {
                 console.error("Error fetching team data:", error);
             }
         };
 
         fetchTeamData();
+        const fetchTeamStandings = async () => {
+            try {
+                const response2 = await fetch(`https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/standings/season.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`);
+                const data2 = await response2.json();
+                const team = findTeamById(data2, teamId);
+                console.log(team)
+                setTeamStandingsData(team); 
+            } catch (error) {
+                console.error("Error fetching team data:", error);
+            }
+        };
+        fetchTeamStandings()
+        console.log(teamStandingsData)
         const findTeamById = (data, id) => {
             for (const conference of data.conferences) {
               for (const division of conference.divisions) {
@@ -37,6 +47,7 @@ const TeamDetails = () => {
             return null;
           };
     }, [teamId]);
+
 
     if (!teamData) return <p>Loading...</p>;
 

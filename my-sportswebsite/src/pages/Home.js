@@ -5,7 +5,7 @@ import AppTeams from '../Components/teams';
 
 const Home = () => {
   return (
-    <div className="pt-10">
+    <div className="">
       <header id="home" className="w-full bg-white shadow-md">
         <AppHero />
       </header>
