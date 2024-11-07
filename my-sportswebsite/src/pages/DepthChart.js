@@ -1,77 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const DepthChart = () => {
-  const { week, homeTeam, awayTeam } = useParams();  // Assuming you have the teams and week in the URL params
-  const [depthChartData, setDepthChartData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const DepthCharts = () => {
+    const { homeTeamId, awayTeamId, currentWeek } = useParams();
+    const [homeDepthChartOff, setHomeDepthChartOff] = useState([]);
+    const [homeDepthChartDef, setHomeDepthChartDef] = useState([]);
+    const [awayDepthChartOff, setAwayDepthChartOff] = useState([]);
+    const [awayDepthChartDef, setAwayDepthChartDef] = useState([]);
 
-  useEffect(() => {
-    const fetchDepthCharts = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/${week}/depth_charts.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`
-        );
-        const data = await response.json();
-        setDepthChartData(data);
-      } catch (error) {
-        console.error('Error fetching depth charts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+        const fetchDepthCharts = async () => {
+            try {
+                const response = await fetch(`https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/seasons/2024/REG/${currentWeek}/depth_charts.json?api_key=kE90jbXWDcpL4cOC4ii17FqzijjTGVpfpSDxq6sl`);
+                const data = await response.json();
 
-    fetchDepthCharts();
-  }, [week]);
+                const homeTeamChart = data.teams.find(team => team.id === homeTeamId);
+                const awayTeamChart = data.teams.find(team => team.id === awayTeamId);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+                console.log("Home Team Chart:", homeTeamChart);
+                console.log("Away Team Chart:", awayTeamChart);
 
-  if (!depthChartData) {
-    return <div>No depth chart data available.</div>;
-  }
+                setHomeDepthChartOff(homeTeamChart?.offense || []);
+                setHomeDepthChartDef(homeTeamChart?.defense || []);
+                setAwayDepthChartOff(awayTeamChart?.offense || []);
+                setAwayDepthChartDef(awayTeamChart?.defense || []);
+            } catch (error) {
+                console.error("Error fetching depth charts:", error);
+            }
+        };
 
-  const homeTeamDepthChart = depthChartData[homeTeam];
-  const awayTeamDepthChart = depthChartData[awayTeam];
+        fetchDepthCharts();
+    }, [homeTeamId, awayTeamId, currentWeek]);
 
-  // Helper function to display the depth chart by position for a team
-  const renderDepthChart = (teamDepthChart) => {
-    return Object.keys(teamDepthChart).map((position) => {
-      const positionData = teamDepthChart[position];
-
-      // If there are no players listed for the position, skip it
-      if (!positionData || !Array.isArray(positionData.players)) return null;
-
-      return (
-        <div key={position} className="mb-4 pt-15">
-          <h2 className="font-bold text-lg text-center">{position}</h2>
-          <div className="flex justify-between">
-            {positionData.players.map((player, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <p>{player.name}</p>
-                <p>{player.number}</p>
-              </div>
-            ))}
-          </div>
+    return (
+        <div className="flex justify-center items-center space-x-8 pt-40">
+            {homeDepthChartOff.length > 0 && awayDepthChartOff.length > 0 ? (
+                <div className="grid grid-cols-3 gap-4">
+                    {homeDepthChartOff.map((position, index) => (
+                        <div key={index} className="flex justify-between items-center">
+                            <span>{position.position?.players && position.position.players[0]?.name ? position.position.players[0].name : "N/A"}</span>
+                            <span className="font-bold">{position.position?.name || "N/A"}</span>
+                            <span>{awayDepthChartOff[index]?.position?.players && awayDepthChartOff[index].position.players[0]?.name ? awayDepthChartOff[index].position.players[0].name : "N/A"}</span>
+                        </div>
+                    ))}
+                    {homeDepthChartDef.map((position, index) => (
+                        <div key={index} className="flex justify-between items-center">
+                            <span>{position.position?.players && position.position.players[0]?.name ? position.position.players[0].name : "N/A"}</span>
+                            <span className="font-bold">{position.position?.name || "N/A"}</span>
+                            <span>{awayDepthChartDef[index]?.position?.players && awayDepthChartDef[index].position.players[0]?.name ? awayDepthChartDef[index].position.players[0].name : "N/A"}</span>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p className='pt-20'>Loading depth charts...</p>
+            )}
         </div>
-      );
-    });
-  };
-
-  return (
-    <div className="flex justify-around pt-15">
-      <div className="w-1/2 p-4">
-        <h1 className="text-xl font-bold text-center mb-4">{homeTeam} Depth Chart</h1>
-        {homeTeamDepthChart && renderDepthChart(homeTeamDepthChart)}
-      </div>
-      <div className="w-1/2 p-4">
-        <h1 className="text-xl font-bold text-center mb-4">{awayTeam} Depth Chart</h1>
-        {awayTeamDepthChart && renderDepthChart(awayTeamDepthChart)}
-      </div>
-    </div>
-  );
+    );
 };
 
-export default DepthChart;
+export default DepthCharts;
