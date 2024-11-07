@@ -10,7 +10,7 @@ export default function AppHero() {
                         NFL <br /> Sports Tracker
                     </figcaption>
                     <figcaption className="absolute bottom-[1%] left-[10%] text-white text-[2vw] font-bold m-4">
-                        - <br /> name <br /> name 
+                        - <br /> Damian Porebski <br /> Nathan Kutella
                     </figcaption>
                 </div>
             </figure>

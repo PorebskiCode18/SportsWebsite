@@ -10,6 +10,7 @@ const Matchups = () => {
   const apiUrl = `https://thingproxy.freeboard.io/fetch/https://api.sportradar.com/nfl/official/trial/v7/en/games/current_week/schedule.json?api_key=${apiKey}`;
   const [error, setError] = useState(null);
   const [currentWeek, setCurrentWeek] = useState(null);
+  const[alldata,setAllData] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const Matchups = () => {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error('Failed to fetch matchups');
         const data = await response.json();
+        setAllData(data);
         setMatchups(data.week.games);
         setByes(data.week.bye_week || []);
       } catch (error) {
@@ -43,7 +45,7 @@ const Matchups = () => {
 
   const handleDepthChartsClick = (homeTeamId, awayTeamId) => {
     if (currentWeek) {
-        navigate(`/depth-charts/${homeTeamId}/${awayTeamId}/${currentWeek}`);
+        navigate(`/depth-charts/${homeTeamId}/${awayTeamId}/${currentWeek}/${alldata.year}`);
     } else {
         console.warn("Current week not available yet.");
     }

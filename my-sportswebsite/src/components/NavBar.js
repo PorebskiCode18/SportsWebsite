@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate and useLocation
 import Home from '../pages/Home';
 import Matchups from '../pages/Matchups';
-import Injuries from '../pages/Injuries';
+import PlayerDetails from '../pages/PlayerDetails';
 import DepthCharts from '../pages/DepthChart';
+import TeamDetails from '../pages/TeamDetails';
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { FaFootballBall } from "react-icons/fa";
 
@@ -161,7 +162,9 @@ const App = () => (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/matchups" element={<Matchups />} />
-            <Route path="/depth-charts/:homeTeamId/:awayTeamId/:currentWeek" element={<DepthCharts />} />
+            <Route path="/depth-charts/:homeTeamId/:awayTeamId/:currentWeek/:currentYear" element={<DepthCharts />} />
+            <Route path="/player/:playerId/:year" element={<PlayerDetails />} />
+            <Route path="/team-info/:teamId" element={<TeamDetails />} />
         </Routes>
     </Router>
 );
