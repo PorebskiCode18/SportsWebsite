@@ -2,7 +2,6 @@ import React from 'react'
 import AppHero from '../Components/hero';
 import AppAbout from '../Components/about';
 import AppTeams from '../Components/teams';
-import AppSearch from '../Components/searchTeams';
 
 
 const Home = () => {
@@ -16,7 +15,6 @@ const Home = () => {
       <main id="header" className="w-full bg-gray-300 shadow-md">
           <AppAbout />
           <AppTeams />
-          <AppSearch />
 
         </main>
 
