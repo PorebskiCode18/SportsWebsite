@@ -26,6 +26,9 @@ export default function AppAbout() {
     return (
         <section id="about" className="py-10 bg-gray-100">
             <div className="container mx-auto">
+                
+                <div className="my-16"></div>
+
                 <div className="text-center mb-8">
                     <h2 className="text-3xl font-bold">About NFL Tracker</h2>
                 </div>

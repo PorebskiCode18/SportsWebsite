@@ -34,7 +34,7 @@ import titans from './assets/teamLogos/titans.png';
 
 export default function AppTeams() {
   return (
-    <section id="teams" className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
+    <section  className="py-16 bg-gradient-to-r from-gray-50 to-gray-100">
       <div className="container mx-auto text-black">
 
         <div className="my-16"></div> {/* Space between sections */}
@@ -111,7 +111,7 @@ export default function AppTeams() {
           </div>
         </div>
 
-        <div className="my-16"></div> {/* Space between NFC and AFC sections */}
+        <div className="my-32"></div> {/* Space between NFC and AFC sections */}
 
         <div className="text-center mb-8">
           <h2 className="text-4xl font-bold">AFC Teams:</h2>
